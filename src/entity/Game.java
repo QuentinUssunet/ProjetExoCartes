@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,28 +31,35 @@ public class Game {
 		
 		List<Card> deckCards = deck.getDeck();
 		
+		List<String> playersName = new ArrayList<>();
 		// Déclaration des joueurs
-		System.out.println("Nom du premier joueur : ");
-		String player1 = sc.next();
-		System.out.println("Nom du second joueur : ");
-		String player2 = sc.next();
-		System.out.println("Nom du troisième joueur : ");
-		String player3 = sc.next();
-		System.out.println("Nom du dernier joueur : ");
-		String player4 = sc.next();
+		for (int i = 1; i < 5; i++) {
+			System.out.println("Nom du joueur n° " + i + " : ");
+			String playerName = sc.next();
+			playersName.add(playerName);
+		}
 		
 		// Création des joueurs
-		players = playerSce.createPlayers(player1, player2, player3, player4);
+		players = playerSce.createPlayers(playersName);
 		
 		// Le jeu contient 52 cartes et se joue à 4 joueurs
 		// le nombre de manches est donc de 52 / 4 .round()
 		Integer turnNumber = turnSce.computeMaxNumOfTurn(deckCards.size(), players.size());
 		turnSce.getTurn().setMaxNumOfTurn(turnNumber);
+		
+		// TODO Mélange des cartes
+		
+		// Distribution des cartes
+		
 	}
 	
 	// Effectue un tour de jeu
 	public void round() {
+		Turn turn = turnSce.getTurn();
+		turn.incrementTurn();
+		Integer turnCounter = turn.getTurnCounter();
 		
+		System.out.println("Le tour "+ turnCounter +" commence !");
 	}
 	
 	public Deck getDeck() {

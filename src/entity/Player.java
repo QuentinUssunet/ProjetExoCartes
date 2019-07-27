@@ -8,6 +8,7 @@ public class Player {
 	
 	public Player(String name) {
 		this.name = name;
+		this.hand = new Hand();
 	}
 
 	public String getName() {
@@ -20,5 +21,9 @@ public class Player {
 
 	public void setVictoryCount(Integer newVictoryCount) {
 		this.victoryCount = newVictoryCount;
+	}
+
+	public Hand getHand() {
+		return this.hand;
 	}
 }
