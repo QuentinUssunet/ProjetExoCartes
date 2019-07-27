@@ -17,20 +17,11 @@ public class Card {
 	public String getValue() {
 		return value;
 	}
-	public void setValue(String value) {
-		this.value = value;
-	}
 	public Color getColor() {
 		return color;
 	}
-	public void setColor(Color color) {
-		this.color = color;
-	}
 	public Integer getCost() {
 		return cost;
-	}
-	public void setCost(Integer cost) {
-		this.cost = cost;
 	}
 	
 	public String toString() {

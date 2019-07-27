@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class DataBase {
 
-	private Collection <String> values;
+	private Collection<String> values;
 	public enum Color {
 		Pique,
 		Coeur, 
@@ -17,23 +17,7 @@ public class DataBase {
 		return values;
 	}
 
-	public void setValues() {
-		if(this.values == null) {
-			createValues();
-		} else {
-			System.out.println("La liste de valeurs est déjà construite !!");
-		}
+	public void setValues(Collection<String> values) {
+		this.values = values;
 	}
-
-	private void createValues() {
-		Collection<String> joker = new ArrayList<>();
-		for (int i = 2; i < 11; i++) {
-			joker.add(String.valueOf(i));
-		}
-		joker.add("Valet");
-		joker.add("Dame");
-		joker.add("Roi");
-		joker.add("As");
-	}
-	
 }

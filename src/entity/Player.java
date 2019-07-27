@@ -3,6 +3,7 @@ package entity;
 public class Player {
 
 	private String name;
+	private Hand hand;
 	private Integer victoryCount;
 	
 	public Player(String name) {

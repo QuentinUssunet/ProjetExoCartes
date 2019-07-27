@@ -19,7 +19,7 @@ public class Game {
 		System.out.println("Une nouvelle partie commence, bonne chance à tous !");
 		
 		// Construction du Deck
-		deck = ;
+		deck = deckSce.init();
 		System.out.println("Le jeu de cartes est prêt : ");
 		
 		// Déclaration des joueurs
@@ -34,8 +34,6 @@ public class Game {
 		
 		// Création des joueurs
 		players = playerSce.createPlayers(player1, player2, player3, player4);
-		
-		
 	}
 	
 	public Deck getDeck() {
