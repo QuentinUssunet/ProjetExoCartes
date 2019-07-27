@@ -28,6 +28,8 @@ public class Game {
 			System.out.println(card.toString());
 		});
 		
+		List<Card> deckCards = deck.getDeck();
+		
 		// Déclaration des joueurs
 		System.out.println("Nom du premier joueur : ");
 		String player1 = sc.next();
@@ -43,10 +45,11 @@ public class Game {
 		
 		// Le jeu contient 52 cartes et se joue à 4 joueurs
 		// le nombre de manches est donc de 52 / 4 .round()
-		Integer tunrNumber = turnSce.
-		
+		Integer turnNumber = turnSce.computeMaxNumOfTurn(deckCards.size(), players.size());
+		turnSce.getTurn().setMaxNumOfTurn(turnNumber);
 	}
 	
+	// Effectue un tour de jeu
 	public void round() {
 		
 	}

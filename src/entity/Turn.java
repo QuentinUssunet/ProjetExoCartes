@@ -5,9 +5,8 @@ public class Turn {
 	private Integer turnCounter;
 	private Integer maxNumberOfTurn;
 
-	public Turn(Integer maxNumOfTurn) {
+	public Turn() {
 		this.turnCounter = 0;
-		this.maxNumberOfTurn = maxNumOfTurn;
 	}
 	
 	public void incrementTurn() {
@@ -16,6 +15,10 @@ public class Turn {
 	
 	public Integer getTurnCounter() {
 		return turnCounter;
+	}
+
+	public void setMaxNumOfTurn(Integer turnNumber) {
+		this.maxNumberOfTurn = turnNumber;
 	}
 	
 }

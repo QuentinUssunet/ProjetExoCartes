@@ -7,11 +7,11 @@ public class TurnService {
 	private Turn turn;
 	
 	public TurnService() {
-		this.turn = new Turn(computeMaxNbrOfTurn(cardsNum, playerNum));
+		this.turn = new Turn();
 	}
 	
-	public Integer computeMaxNbrOfTurn(Integer cardsNum, Integer playerNum) {
-		return 1;
+	public Integer computeMaxNumOfTurn(Integer cardsNum, Integer playerNum) {
+		return Math.round(cardsNum/playerNum);
 	}
 
 	public Turn getTurn() {
