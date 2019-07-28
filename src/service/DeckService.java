@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import dao.DataBase;
 import entity.Card;
@@ -31,5 +32,9 @@ public class DeckService {
 				j++;
 			}
 		}
+	}
+
+	public void comparePlayedCardsAndGetWinner(Map<Player, Card> cardsPlayed) {
+		// TODO pour chaque paire (k, v) comparer les v aux autres si > remplir le winner
 	}
 }

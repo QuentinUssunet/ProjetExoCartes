@@ -68,10 +68,15 @@ public class Game {
 		Map<Player, Card> cardsPlayed = new HashMap<Player, Card>();
 		
 		System.out.println("Le tour "+ turnCounter +" commence !");
-		 for(Player player : players) {
-			 Card playedCard = player.getHand().playCard();
-			 cardsPlayed.put(player, playedCard);
-		 }
+		// Sélection d'une carte par joueur
+		for(Player player : players) {
+			Card playedCard = player.getHand().playCard();
+			System.out.println(player.getName() + " joue un(e) " + playedCard.toString());
+			cardsPlayed.put(player, playedCard);
+		}
+		 
+		// Comparaison des cartes jouées, désignation du vainqueur du tour
+		deckSce.comparePlayedCardsAndGetWinner(cardsPlayed);
 	}
 	
 	private void endOfGame() {
