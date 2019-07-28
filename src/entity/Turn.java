@@ -17,8 +17,12 @@ public class Turn {
 		return turnCounter;
 	}
 
-	public void setMaxNumOfTurn(Integer turnNumber) {
-		this.maxNumberOfTurn = turnNumber;
+	public Integer getMaxNumberOfTurn() {
+		return maxNumberOfTurn;
+	}
+
+	public void setMaxNumberOfTurn(Integer maxNumberOfTurn) {
+		this.maxNumberOfTurn = maxNumberOfTurn;
 	}
 	
 }

@@ -1,7 +1,9 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import service.DeckService;
@@ -45,12 +47,12 @@ public class Game {
 		// Le jeu contient 52 cartes et se joue à 4 joueurs
 		// le nombre de manches est donc de 52 / 4 .round()
 		Integer turnNumber = turnSce.computeMaxNumOfTurn(deckCards.size(), players.size());
-		turnSce.getTurn().setMaxNumOfTurn(turnNumber);
+		turnSce.getTurn().setMaxNumberOfTurn(turnNumber);
 		
 		// TODO Mélange des cartes
 		
 		// Distribution des cartes
-		
+		deckSce.cardDistribution(deck.getDeck(), players);
 	}
 	
 	// Effectue un tour de jeu
@@ -59,9 +61,24 @@ public class Game {
 		turn.incrementTurn();
 		Integer turnCounter = turn.getTurnCounter();
 		
+		if(turnCounter.equals(turn.getMaxNumberOfTurn())) {
+			endOfGame();
+		}
+		
+		Map<Player, Card> cardsPlayed = new HashMap<Player, Card>();
+		
 		System.out.println("Le tour "+ turnCounter +" commence !");
+		 for(Player player : players) {
+			 Card playedCard = player.getHand().playCard();
+			 cardsPlayed.put(player, playedCard);
+		 }
 	}
 	
+	private void endOfGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public Deck getDeck() {
 		return deck;
 	}
