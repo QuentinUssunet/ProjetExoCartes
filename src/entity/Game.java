@@ -14,35 +14,41 @@ public class Game {
 
 	private Deck deck;
 	private List<Player> players;
+	private Map<Player, Integer> pointsCounter;
 	
 	private PlayerService playerSce = new PlayerService();
 	private DeckService deckSce = new DeckService();
 	private TurnService turnSce = new TurnService();
+	private InformationsPrinter infoPrint = new InformationsPrinter();
 	
 	public void init() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Une nouvelle partie commence, bonne chance à tous !");
+		infoPrint.startGame();;
 		
 		// Construction du Deck
 		deck = deckSce.init();
-		System.out.println("Le jeu de cartes est prêt : ");
+		infoPrint.deckReady();
 		// Affichage du deck
-		deck.getDeck().forEach( card -> {
-			System.out.println(card.toString());
-		});
+		infoPrint.printDeck(deck.getDeck());
 		
 		List<Card> deckCards = deck.getDeck();
 		
 		List<String> playersName = new ArrayList<>();
 		// Déclaration des joueurs
 		for (int i = 1; i < 5; i++) {
-			System.out.println("Nom du joueur n° " + i + " : ");
+			infoPrint.newPlayerDeclare(i);
 			String playerName = sc.next();
 			playersName.add(playerName);
 		}
 		
 		// Création des joueurs
 		players = playerSce.createPlayers(playersName);
+		
+		// Initialisation du compteur de points
+		pointsCounter = new HashMap<Player, Integer>();
+		for (Player player : players) {
+			pointsCounter.put(player, 0);
+		}
 		
 		// Le jeu contient 52 cartes et se joue à 4 joueurs
 		// le nombre de manches est donc de 52 / 4 .round()
@@ -67,20 +73,22 @@ public class Game {
 		
 		Map<Player, Card> cardsPlayed = new HashMap<Player, Card>();
 		
-		System.out.println("Le tour "+ turnCounter +" commence !");
+		infoPrint.turnNum(turnCounter);
 		// Sélection d'une carte par joueur
 		for(Player player : players) {
 			Card playedCard = player.getHand().playCard();
-			System.out.println(player.getName() + " joue un(e) " + playedCard.toString());
+			infoPrint.cardPlayed(player.getName(), playedCard.toString());
 			cardsPlayed.put(player, playedCard);
 		}
 		 
 		// Comparaison des cartes jouées, désignation du vainqueur du tour
-		deckSce.comparePlayedCardsAndGetWinner(cardsPlayed);
+		Player turnWinner = deckSce.comparePlayedCardsAndGetWinner(cardsPlayed);
+		Integer oldWinnerScore = pointsCounter.get(turnWinner);
+		pointsCounter.replace(turnWinner, oldWinnerScore, oldWinnerScore + 1);
+		infoPrint.turnWinner(turnWinner.getName());
 	}
 	
 	private void endOfGame() {
-		// TODO Auto-generated method stub
 		
 	}
 

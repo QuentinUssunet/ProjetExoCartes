@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import dao.DataBase;
 import entity.Card;
@@ -34,7 +35,24 @@ public class DeckService {
 		}
 	}
 
-	public void comparePlayedCardsAndGetWinner(Map<Player, Card> cardsPlayed) {
-		// TODO pour chaque paire (k, v) comparer les v aux autres si > remplir le winner
+	public Player comparePlayedCardsAndGetWinner(Map<Player, Card> cardsPlayed) {
+		Player winner = null;
+		Card bestCard = null;
+		for (Map.Entry<Player, Card> entry : cardsPlayed.entrySet()) {
+			if(winner == null) { 
+				winner = entry.getKey();
+				bestCard = entry.getValue();
+			} else if (entry.getValue().getCost() > bestCard.getCost()) {
+				winner = entry.getKey();
+				bestCard = entry.getValue();
+			} else if (entry.getValue().getCost() == bestCard.getCost()) {
+				chooseWinnerRng(Map.entry(winner, bestCard), entry);
+			}
+		}
+		return winner;
+	}
+
+	private Entry<Player, Card> chooseWinnerRng(Entry<Player, Card> actualWinner, Entry<Player, Card> pretender) {
+		return (2 * Math.random()) < 1 ? actualWinner : pretender;
 	}
 }
